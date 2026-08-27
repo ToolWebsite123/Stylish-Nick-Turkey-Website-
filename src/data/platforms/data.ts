@@ -1,0 +1,50 @@
+import { Platform } from '@/types/platform';
+
+export const PLATFORMS_DATA: Platform[] = [
+  {
+    id: 'pubg',
+    name: 'PUBG Mobile',
+    slug: 'pubg-mobile',
+    icon: '🎮',
+    descriptionTr: 'PUBG Mobile kullanıcı adı ve nick sistemi için uyumluluk durumu.',
+    maxCharacterLength: 14,
+    maxByteLength: 28,
+    disclaimerTr: 'PUBG Mobile cihaz fontuna bağlı olarak bazı birleşik simgeleri "?" kutucuğu olarak gösterebilir.',
+  },
+  {
+    id: 'instagram',
+    name: 'Instagram',
+    slug: 'instagram',
+    icon: '📸',
+    descriptionTr: 'Instagram Biyografi (Bio), İsim ve Gönderi açıklamaları için uyumluluk durumu.',
+    maxCharacterLength: 150,
+    disclaimerTr: 'Instagram Bio alanında tüm Unicode karakter bloklarını geniş ölçekte destekler.',
+  },
+  {
+    id: 'discord',
+    name: 'Discord',
+    slug: 'discord',
+    icon: '💬',
+    descriptionTr: 'Discord Kullanıcı Adı, Görünür İsim ve Sohbet mesajları için uyumluluk durumu.',
+    maxCharacterLength: 32,
+    disclaimerTr: 'Discord masaüstü ve mobil istemcileri geniş Unicode font desteğine sahiptir.',
+  },
+  {
+    id: 'whatsapp',
+    name: 'WhatsApp',
+    slug: 'whatsapp',
+    icon: '🟢',
+    descriptionTr: 'WhatsApp Hakkımda (Hakkında) durumu ve mesajlaşma sohbetleri için uyumluluk durumu.',
+    maxCharacterLength: 25,
+    disclaimerTr: 'WhatsApp sohbet mesajlarında tüm şekilli harf ve semboller doğrudan görüntülenebilir.',
+  },
+  {
+    id: 'tiktok',
+    name: 'TikTok',
+    slug: 'tiktok',
+    icon: '🎵',
+    descriptionTr: 'TikTok Kullanıcı Adı, Profil İsmi ve Bio açıklamaları için uyumluluk durumu.',
+    maxCharacterLength: 30,
+    disclaimerTr: 'TikTok kullanıcı adı alanında yalnızca belirli izin verilen Unicode simgeleri desteklenir.',
+  },
+];
