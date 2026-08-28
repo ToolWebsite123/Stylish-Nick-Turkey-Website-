@@ -91,11 +91,10 @@ export function Generator({ inputText: externalInputText, onInputChange }: Gener
         inputText={inputText}
         selectedPlatformId={platformIdFilter}
         onCopySuccess={handleCopySuccess}
-        onQuickSample={handleInputChange}
         onResetFilters={handleResetFilters}
       />
 
-      {/* 5. Toast Feedback Alert */}
+      {/* 3. Toast Feedback Alert */}
       <Toast
         message={toastMessage}
         onClose={() => setToastMessage(null)}

@@ -29,7 +29,7 @@ export function GeneratorInput({
     <div className="w-full space-y-3 max-w-4xl mx-auto">
       {/* Pill Search Bar Container with Box Shadow & Border */}
       <div className="w-full bg-white dark:bg-[var(--bg-card)] rounded-full px-4 md:px-6 py-3.5 flex items-center gap-3 border border-[var(--border-subtle)] focus-within:border-[var(--primary)] shadow-lg shadow-slate-200/60 dark:shadow-black/30 focus-within:shadow-xl focus-within:shadow-[var(--primary)]/15 transition-all duration-200">
-        {/* Pencil Icon as shown in screenshot */}
+        {/* Pencil Icon */}
         <div className="flex items-center justify-center shrink-0 text-slate-500 dark:text-slate-400">
           <span className="text-xl md:text-2xl leading-none select-none">✏️</span>
         </div>
@@ -44,7 +44,7 @@ export function GeneratorInput({
           className="flex-1 bg-transparent text-[var(--text-primary)] placeholder-[var(--text-muted)] text-base md:text-lg font-medium outline-none focus:outline-none focus-visible:outline-none focus:ring-0 [outline:none]"
         />
 
-        {/* Action buttons (Paste & Clear) + Counter */}
+        {/* Action buttons (Paste & Clear) */}
         <div className="flex items-center gap-2 shrink-0">
           {value ? (
             <button
@@ -74,7 +74,7 @@ export function GeneratorInput({
         </div>
       </div>
 
-      {/* Quick Sample Suggestions (Only shown when search bar is empty) */}
+      {/* Quick Sample Suggestions */}
       {!value && (
         <div className="flex items-center justify-center gap-2 flex-wrap text-xs text-[var(--text-muted)] pt-1">
           <span className="font-medium">Hızlı Örnekler:</span>

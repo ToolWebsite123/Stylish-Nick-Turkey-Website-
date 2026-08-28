@@ -10,7 +10,7 @@ interface StyleCardListProps {
   inputText: string;
   selectedPlatformId?: PlatformId;
   onCopySuccess: (styleName: string) => void;
-  onQuickSample: (sampleText: string) => void;
+  onQuickSample?: (sampleText: string) => void;
   onResetFilters?: () => void;
 }
 

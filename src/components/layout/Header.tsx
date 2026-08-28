@@ -10,12 +10,11 @@ import { Container } from './Container';
 import { MobileNavigation, NavItem } from './MobileNavigation';
 
 const NAV_ITEMS: NavItem[] = [
-  { href: '/', label: 'Ana Sayfa' },
-  { href: '/sekilli-nick', label: 'Şekilli Nick' },
-  { href: '/sekilli-yazi', label: 'Şekilli Yazı' },
-  { href: '/sekilli-harfler', label: 'Şekilli Harfler' },
-  { href: '/sekilli-semboller', label: 'Şekilli Semboller' },
-  { href: '/pubg-nickleri', label: 'PUBG Nickleri' },
+  { href: '/', label: 'Emojiler' },
+  { href: '/', label: 'Şekilli & Sembollü v2' },
+  { href: '/', label: 'Şekilli Semboller' },
+  { href: '/', label: 'Pubg Şekilli Semboller' },
+  { href: '/', label: 'Pubg Şekilli Nick' },
 ];
 
 export const Header: React.FC = () => {

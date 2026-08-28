@@ -83,10 +83,6 @@ export function StyleCard({ result, selectedPlatformId, onCopySuccess }: StyleCa
   const platformCompat = selectedPlatformId
     ? getPlatformCompatibility(result.styleId, selectedPlatformId)
     : null;
-  const platformDef = selectedPlatformId ? getPlatformDefinition(selectedPlatformId) : null;
-  const platformStatusDisplay = platformCompat
-    ? getPlatformStatusDisplay(platformCompat.status)
-    : null;
 
   return (
     <div className="group p-3.5 md:p-4 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[var(--primary)]/40 hover:shadow-md transition-all duration-200 flex flex-col justify-between space-y-2.5">
@@ -100,17 +96,27 @@ export function StyleCard({ result, selectedPlatformId, onCopySuccess }: StyleCa
             ({result.category})
           </span>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 flex-wrap justify-end">
           {getTurkishSupportBadge()}
-          {platformStatusDisplay && platformDef && (
-            <span
-              className={`px-2 py-0.5 text-[9px] font-bold rounded-full border ${platformStatusDisplay.badgeClass} flex items-center gap-1`}
-              title={platformCompat?.notesTr || `${platformDef.name} uyumluluk durumu`}
-            >
-              <span>{platformDef.icon}</span>
-              <span>{platformStatusDisplay.labelTr}</span>
-            </span>
-          )}
+          {/* Real-time Platform Compatibility Badges */}
+          <div className="flex items-center gap-1">
+            {(['pubg', 'instagram', 'discord', 'whatsapp'] as PlatformId[]).map((pid) => {
+              const pDef = getPlatformDefinition(pid);
+              const pCompat = getPlatformCompatibility(result.styleId, pid);
+              const pDisplay = getPlatformStatusDisplay(pCompat.status);
+              if (!pDef) return null;
+              return (
+                <span
+                  key={pid}
+                  className={`px-1.5 py-0.5 text-[9px] font-bold rounded-md border ${pDisplay.badgeClass} flex items-center gap-0.5 cursor-help`}
+                  title={`${pDef.name}: ${pDisplay.labelTr}${pCompat.notesTr ? ` (${pCompat.notesTr})` : ''}`}
+                >
+                  <span>{pDef.icon}</span>
+                  <span>{pDisplay.icon}</span>
+                </span>
+              );
+            })}
+          </div>
         </div>
       </div>
 
