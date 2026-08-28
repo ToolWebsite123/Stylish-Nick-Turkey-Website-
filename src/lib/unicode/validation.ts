@@ -1,7 +1,7 @@
 import { UnicodeStyleDefinition, StyleValidationResult } from '@/types/unicode';
 import { detectTurkishCharacterSupport } from './turkish';
 
-const VALID_CATEGORIES = ['sans', 'serif', 'gothic', 'cursive', 'decorative', 'monospace', 'frames'];
+const VALID_CATEGORIES = ['sans', 'serif', 'gothic', 'cursive', 'decorative', 'monospace', 'frames', 'symbols'];
 
 /**
  * Validates a list of Unicode style definitions to ensure integrity, uniqueness, and proper metadata.

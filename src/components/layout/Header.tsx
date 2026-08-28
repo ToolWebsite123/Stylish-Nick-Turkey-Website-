@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { FavoritesDrawer } from '@/components/ui/FavoritesDrawer';
+import { useFavorites } from '@/hooks/useStorage';
 import { Container } from './Container';
 import { MobileNavigation, NavItem } from './MobileNavigation';
 
@@ -19,6 +21,8 @@ const NAV_ITEMS: NavItem[] = [
 export const Header: React.FC = () => {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [favoritesDrawerOpen, setFavoritesDrawerOpen] = useState(false);
+  const { count: favoritesCount } = useFavorites();
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-[var(--border-subtle)] bg-[var(--bg-surface)]/90 backdrop-blur-md">
@@ -46,11 +50,10 @@ export const Header: React.FC = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                    isActive
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${isActive
                       ? 'bg-[var(--bg-elevated)] text-[var(--primary)] font-semibold'
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]'
-                  }`}
+                    }`}
                 >
                   {item.label}
                 </Link>
@@ -58,8 +61,23 @@ export const Header: React.FC = () => {
             })}
           </nav>
 
-          {/* Right Actions: Theme Toggle & Mobile Menu */}
+          {/* Right Actions: Favorites, Theme Toggle & Mobile Menu */}
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setFavoritesDrawerOpen(true)}
+              className="px-3 py-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-elevated)] text-xs font-bold flex items-center gap-1.5 transition-all relative"
+              title="Kaydedilenler & Geçmiş"
+            >
+              <span>⭐</span>
+              <span className="hidden sm:inline">Favoriler</span>
+              {favoritesCount > 0 && (
+                <span className="w-4 h-4 rounded-full bg-[var(--primary)] text-white text-[10px] flex items-center justify-center font-bold">
+                  {favoritesCount}
+                </span>
+              )}
+            </button>
+
             <ThemeToggle />
 
             <button
@@ -75,6 +93,12 @@ export const Header: React.FC = () => {
           </div>
         </div>
       </Container>
+
+      {/* Favorites Drawer Modal */}
+      <FavoritesDrawer
+        isOpen={favoritesDrawerOpen}
+        onClose={() => setFavoritesDrawerOpen(false)}
+      />
 
       {/* Mobile Drawer */}
       <MobileNavigation

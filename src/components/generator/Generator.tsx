@@ -9,8 +9,6 @@ import {
 } from '@/lib/unicode/search';
 import { PlatformId } from '@/types/platform';
 import { GeneratorInput } from './GeneratorInput';
-import { GeneratorOptions } from './GeneratorOptions';
-import { GeneratorSearchFilter } from './GeneratorSearchFilter';
 import { StyleCardList } from './StyleCardList';
 import { Toast } from '@/components/ui/Toast';
 
@@ -24,8 +22,8 @@ export function Generator() {
 
   // 1. Transform text across all available Unicode styles
   const allResults = useMemo(() => {
-    if (!inputText.trim()) return [];
-    return transformText(inputText, {
+    const targetText = inputText.trim() || 'Merhaba Dünya';
+    return transformText(targetText, {
       simplifyTurkish,
     });
   }, [inputText, simplifyTurkish]);
@@ -66,25 +64,7 @@ export function Generator() {
         onClear={() => setInputText('')}
       />
 
-      {/* 2. Turkish Character Mode Switch */}
-      <GeneratorOptions
-        simplifyTurkish={simplifyTurkish}
-        onToggleSimplifyTurkish={setSimplifyTurkish}
-      />
-
-      {/* 3. Search & Category / Compatibility Filter Bar */}
-      <GeneratorSearchFilter
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
-        selectedCompatibility={selectedCompatibility}
-        onCompatibilityChange={setSelectedCompatibility}
-        totalResultsCount={filteredResults.length}
-        onResetFilters={handleResetFilters}
-      />
-
-      {/* 4. Real-Time Style Results Grid */}
+      {/* 2. Real-Time Style Results Grid */}
       <StyleCardList
         results={filteredResults}
         inputText={inputText}

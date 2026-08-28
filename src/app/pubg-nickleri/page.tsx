@@ -4,6 +4,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Container } from '@/components/layout/Container';
 import { NickBuilder } from '@/components/nick-builder';
+import { PlatformTester } from '@/components/ui/PlatformTester';
 import { Breadcrumb } from '@/components/seo/Breadcrumb';
 import Link from 'next/link';
 
@@ -36,6 +37,9 @@ export default function PubgNickleriPage() {
 
           {/* Interactive Core Nick Builder Component */}
           <NickBuilder />
+
+          {/* Platform Diagnostic Tester */}
+          <PlatformTester />
 
           {/* Detailed Content & Guide */}
           <article className="prose dark:prose-invert max-w-none pt-6 border-t border-[var(--border-subtle)] space-y-6 text-sm text-[var(--text-secondary)]">

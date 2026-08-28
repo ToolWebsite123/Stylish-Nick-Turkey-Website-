@@ -22,41 +22,13 @@ export function StyleCardList({
   onQuickSample,
   onResetFilters,
 }: StyleCardListProps) {
-  // Empty Input State: When user hasn't typed anything
-  if (!inputText.trim()) {
-    return (
-      <div className="p-8 md:p-12 rounded-3xl bg-[var(--bg-elevated)] border-2 border-dashed border-[var(--border-subtle)] text-center space-y-4">
-        <div className="w-16 h-16 mx-auto rounded-2xl bg-[var(--primary)]/10 text-[var(--primary)] flex items-center justify-center text-2xl font-bold">
-          ✍️
-        </div>
-        <div className="space-y-1 max-w-md mx-auto">
-          <h3 className="text-lg font-bold text-[var(--text-primary)]">
-            Şekilli Yazı Oluşturmaya Başlayın
-          </h3>
-          <p className="text-sm text-[var(--text-muted)]">
-            Yukarıdaki kutuya metninizi veya oyun nickinizi yazın. Gotik, el yazısı, kalın ve oyuncu stilleri anında oluşturulacaktır.
-          </p>
-        </div>
+  const INITIAL_COUNT = 30;
+  const [visibleCount, setVisibleCount] = React.useState(INITIAL_COUNT);
 
-        <div className="pt-2 flex items-center justify-center gap-2 flex-wrap">
-          <button
-            type="button"
-            onClick={() => onQuickSample('Merhaba Dünya')}
-            className="px-4 py-2 rounded-xl bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[var(--primary)] text-xs font-semibold text-[var(--text-secondary)] transition-all active:scale-95"
-          >
-            &quot;Merhaba Dünya&quot; dene
-          </button>
-          <button
-            type="button"
-            onClick={() => onQuickSample('Kral Oyuncu ⚔️')}
-            className="px-4 py-2 rounded-xl bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[var(--primary)] text-xs font-semibold text-[var(--text-secondary)] transition-all active:scale-95"
-          >
-            &quot;Kral Oyuncu ⚔️&quot; dene
-          </button>
-        </div>
-      </div>
-    );
-  }
+  // Reset visible count back to 30 when search input text changes
+  React.useEffect(() => {
+    setVisibleCount(INITIAL_COUNT);
+  }, [inputText]);
 
   // No Filter Results State
   if (results.length === 0) {
@@ -89,11 +61,14 @@ export function StyleCardList({
     );
   }
 
+  const visibleResults = results.slice(0, visibleCount);
+  const hasMore = results.length > visibleCount;
+
   return (
     <div className="space-y-4">
-      {/* Grid of Results */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {results.map((res) => (
+      {/* Single Column Results (1 Box Per Line) */}
+      <div className="grid grid-cols-1 gap-4">
+        {visibleResults.map((res) => (
           <StyleCard
             key={res.styleId}
             result={res}
@@ -102,6 +77,22 @@ export function StyleCardList({
           />
         ))}
       </div>
+
+      {/* Load More Button */}
+      {hasMore && (
+        <div className="pt-4 flex flex-col items-center justify-center space-y-2">
+          <button
+            type="button"
+            onClick={() => setVisibleCount((prev) => prev + 15)}
+            className="px-8 py-3.5 rounded-2xl bg-[var(--primary)] text-white text-sm font-bold hover:opacity-95 transition-all shadow-lg shadow-[var(--primary)]/25 active:scale-95 flex items-center gap-2 group cursor-pointer"
+          >
+            <span>Daha Fazla Göster</span>
+          </button>
+          <span className="text-xs text-[var(--text-muted)]">
+            Kalan {results.length - visibleResults.length} stil daha var
+          </span>
+        </div>
+      )}
     </div>
   );
 }

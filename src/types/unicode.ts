@@ -7,7 +7,8 @@ export type UnicodeCategory =
   | 'cursive'
   | 'decorative'
   | 'monospace'
-  | 'frames';
+  | 'frames'
+  | 'symbols';
 
 export interface UnicodeStyleDefinition {
   id: string;

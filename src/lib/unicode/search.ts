@@ -11,7 +11,8 @@ export type SearchCategoryFilter =
   | 'aesthetic'
   | 'gaming'
   | 'minimal'
-  | 'decorative';
+  | 'decorative'
+  | 'symbols';
 
 export type SearchCompatibilityFilter =
   | 'all'
@@ -39,6 +40,7 @@ export const CATEGORY_FILTER_OPTIONS: { id: SearchCategoryFilter; label: string 
   { id: 'gaming', label: 'Gaming' },
   { id: 'minimal', label: 'Minimal' },
   { id: 'decorative', label: 'Dekoratif' },
+  { id: 'symbols', label: 'Sembollü' },
 ];
 
 export const COMPATIBILITY_FILTER_OPTIONS: { id: SearchCompatibilityFilter; label: string }[] = [
@@ -117,6 +119,8 @@ export function filterStyleDefinitions(
           return style.category === 'monospace' || (style.tags && style.tags.includes('minimal'));
         case 'decorative':
           return style.category === 'decorative';
+        case 'symbols':
+          return style.category === 'symbols';
         default:
           return true;
       }

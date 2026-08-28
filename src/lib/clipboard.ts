@@ -2,6 +2,8 @@
  * Safe client-side utility to copy text to system clipboard.
  * Uses modern Clipboard API with fallback for restricted browser contexts.
  */
+import { addCopyHistory } from './storage';
+
 export async function copyToClipboard(text: string): Promise<boolean> {
   if (!text) return false;
 
@@ -9,6 +11,7 @@ export async function copyToClipboard(text: string): Promise<boolean> {
   if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
     try {
       await navigator.clipboard.writeText(text);
+      addCopyHistory(text);
       return true;
     } catch {
       // Fallback below
@@ -35,6 +38,9 @@ export async function copyToClipboard(text: string): Promise<boolean> {
 
     const successful = document.execCommand('copy');
     document.body.removeChild(textArea);
+    if (successful) {
+      addCopyHistory(text);
+    }
     return successful;
   } catch (err) {
     console.error('Clipboard copy failed:', err);
