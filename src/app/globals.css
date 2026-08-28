@@ -71,6 +71,10 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+h1, h2, h3, .font-display {
+  font-family: var(--font-display), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
 /* Ensure font used for website UI does NOT force font-feature-settings that alter Unicode symbols */
 .font-unicode-preview {
   font-family: 'Segoe UI Symbol', 'Apple Color Emoji', 'Noto Color Emoji', system-ui, sans-serif;

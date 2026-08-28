@@ -13,24 +13,24 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col justify-between bg-[var(--bg-base)]">
-      {/* 1. Header */}
+      {/* Header */}
       <Header />
 
       <main className="flex-1 py-6 md:py-10">
-        <Container className="space-y-10 max-w-5xl">
-          {/* 2. Hero Section (Immediate Value Proposition) */}
+        <Container className="space-y-6 max-w-5xl">
+          {/* Hero Section */}
           <div className="text-center max-w-5xl mx-auto px-2">
             <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent leading-tight sm:whitespace-nowrap">
               Şekilli Nick ve Şekilli Yazı Oluşturucu
             </h1>
           </div>
 
-          {/* 3. Main Generator */}
+          {/* Main Generator */}
           <Generator />
         </Container>
       </main>
 
-      {/* 4. Footer */}
+      {/* Footer */}
       <Footer />
     </div>
   );

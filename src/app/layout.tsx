@@ -1,6 +1,14 @@
 import type { Metadata } from 'next';
+import { Outfit } from 'next/font/google';
 import './globals.css';
 import { siteConfig } from '@/config/site';
+
+const outfit = Outfit({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-display',
+  display: 'swap',
+  weight: ['600', '700', '800', '900'],
+});
 
 export const metadata: Metadata = {
   title: siteConfig.defaultTitle,
@@ -14,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={siteConfig.language} className="dark" suppressHydrationWarning>
+    <html lang={siteConfig.language} className={`dark ${outfit.variable}`} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

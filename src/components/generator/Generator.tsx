@@ -12,12 +12,33 @@ import { GeneratorInput } from './GeneratorInput';
 import { StyleCardList } from './StyleCardList';
 import { Toast } from '@/components/ui/Toast';
 
-export function Generator() {
-  const [inputText, setInputText] = useState('Merhaba Dünya');
+interface GeneratorProps {
+  inputText?: string;
+  onInputChange?: (text: string) => void;
+}
+
+export function Generator({ inputText: externalInputText, onInputChange }: GeneratorProps = {}) {
+  const [internalInputText, setInternalInputText] = useState('Merhaba Dünya');
+
+  const isControlled = externalInputText !== undefined;
+  const inputText = isControlled ? externalInputText : internalInputText;
+
+  const handleInputChange = useCallback(
+    (text: string) => {
+      if (onInputChange) {
+        onInputChange(text);
+      }
+      if (!isControlled) {
+        setInternalInputText(text);
+      }
+    },
+    [onInputChange, isControlled]
+  );
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<SearchCategoryFilter>('all');
   const [selectedCompatibility, setSelectedCompatibility] = useState<SearchCompatibilityFilter>('all');
-  const [simplifyTurkish, setSimplifyTurkish] = useState(false);
+  const [simplifyTurkish] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // 1. Transform text across all available Unicode styles
@@ -60,8 +81,8 @@ export function Generator() {
       {/* 1. Large Input Area */}
       <GeneratorInput
         value={inputText}
-        onChange={setInputText}
-        onClear={() => setInputText('')}
+        onChange={handleInputChange}
+        onClear={() => handleInputChange('')}
       />
 
       {/* 2. Real-Time Style Results Grid */}
@@ -70,7 +91,7 @@ export function Generator() {
         inputText={inputText}
         selectedPlatformId={platformIdFilter}
         onCopySuccess={handleCopySuccess}
-        onQuickSample={setInputText}
+        onQuickSample={handleInputChange}
         onResetFilters={handleResetFilters}
       />
 

@@ -16,14 +16,10 @@ import {
 export function useFavorites() {
   const [favorites, setFavorites] = useState<SavedFavorite[]>([]);
 
-  const refresh = useCallback(() => {
-    setFavorites(getFavorites());
-  }, []);
-
   useEffect(() => {
-    refresh();
+    const handleUpdate = () => setFavorites(getFavorites());
+    queueMicrotask(handleUpdate);
 
-    const handleUpdate = () => refresh();
     window.addEventListener('favorites-updated', handleUpdate);
     window.addEventListener('storage', handleUpdate);
 
@@ -31,7 +27,7 @@ export function useFavorites() {
       window.removeEventListener('favorites-updated', handleUpdate);
       window.removeEventListener('storage', handleUpdate);
     };
-  }, [refresh]);
+  }, []);
 
   const add = useCallback((item: Omit<SavedFavorite, 'id' | 'savedAt'>) => {
     const updated = saveFavorite(item);
@@ -66,14 +62,10 @@ export function useFavorites() {
 export function useCopyHistory() {
   const [history, setHistory] = useState<CopyHistoryItem[]>([]);
 
-  const refresh = useCallback(() => {
-    setHistory(getCopyHistory());
-  }, []);
-
   useEffect(() => {
-    refresh();
+    const handleUpdate = () => setHistory(getCopyHistory());
+    queueMicrotask(handleUpdate);
 
-    const handleUpdate = () => refresh();
     window.addEventListener('copy-history-updated', handleUpdate);
     window.addEventListener('storage', handleUpdate);
 
@@ -81,7 +73,7 @@ export function useCopyHistory() {
       window.removeEventListener('copy-history-updated', handleUpdate);
       window.removeEventListener('storage', handleUpdate);
     };
-  }, [refresh]);
+  }, []);
 
   const clear = useCallback(() => {
     const empty = clearHistUtil();

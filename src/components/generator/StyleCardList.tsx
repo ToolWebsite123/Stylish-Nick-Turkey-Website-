@@ -19,16 +19,17 @@ export function StyleCardList({
   inputText,
   selectedPlatformId,
   onCopySuccess,
-  onQuickSample,
   onResetFilters,
 }: StyleCardListProps) {
   const INITIAL_COUNT = 30;
   const [visibleCount, setVisibleCount] = React.useState(INITIAL_COUNT);
+  const [prevInputText, setPrevInputText] = React.useState(inputText);
 
   // Reset visible count back to 30 when search input text changes
-  React.useEffect(() => {
+  if (prevInputText !== inputText) {
+    setPrevInputText(inputText);
     setVisibleCount(INITIAL_COUNT);
-  }, [inputText]);
+  }
 
   // No Filter Results State
   if (results.length === 0) {
