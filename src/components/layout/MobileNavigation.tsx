@@ -80,11 +80,11 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
 
               return (
                 <Link
-                  key={item.href}
+                  key={item.label}
                   href={item.href}
                   onClick={onClose}
                   className={`flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium transition-all min-h-[44px] ${
-                    isActive
+                    isActive && item.href !== '/'
                       ? 'bg-[var(--primary)] text-[var(--primary-fg)] font-semibold'
                       : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]'
                   }`}
